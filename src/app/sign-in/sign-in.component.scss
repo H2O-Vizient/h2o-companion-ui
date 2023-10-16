@@ -1,0 +1,52 @@
+.welcome-text {
+  font-size: xx-large;
+  text-align: center;
+  width: 75%;
+}
+
+.sign-in-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.or-block {
+  display: flex;
+  justify-content: center;
+  margin: 2em;
+}
+
+button {
+  width: 100%;
+}
+
+.login-help {
+  display: flex;
+}
+
+.checkbox {
+  margin: 0;
+}
+
+.checkbox-container {
+  margin: 1em;
+}
+
+.text-box-input {
+  margin: 1em;
+}
+
+.forgot-login {
+  margin: 1em;
+}
+
+hr {
+  width: 100%;
+  font-weight: 500;
+}
+
+.or-text {
+  margin: 0 1em 0 1em;
+}

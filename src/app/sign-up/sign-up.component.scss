@@ -1,0 +1,32 @@
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.text {
+  margin: 1em;
+  font-size: large;
+}
+
+.your-name {
+  display: flex;
+  align-items: center;
+  margin: 2em 0 1em 0;
+  width: 75%;
+}
+
+
+
+button {
+  width: 25%;
+  margin: 1em;
+}
+
+button:disabled {
+  color: gray;
+  background-color: white;
+  border: 1px solid gray;
+}
