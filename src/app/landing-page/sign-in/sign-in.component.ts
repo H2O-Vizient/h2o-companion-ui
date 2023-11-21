@@ -56,6 +56,7 @@ export class SignInComponent {
   ) {}
 
   async onSubmit() {
+
     try {
       this.loading = true
       const request: SignInRequest = {
@@ -65,7 +66,8 @@ export class SignInComponent {
 
       const response = await this.supabase.signIn(request);
 
-
+      // Just calling this method here in order to see what it looks like to retrieve data from supabase
+      await this.supabase.getData();
 
       console.log(response);
     } catch (error) {

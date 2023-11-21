@@ -56,23 +56,6 @@ export class SupabaseService {
         return this.supabase.auth.signOut()
     }
 
-    updateProfile(profile: Profile) {
-        const update = {
-            ...profile,
-            updated_at: new Date(),
-        }
-
-        return this.supabase.from('profiles').upsert(update)
-    }
-
-    downLoadImage(path: string) {
-        return this.supabase.storage.from('avatars').download(path)
-    }
-
-    uploadAvatar(filePath: string, file: File) {
-        return this.supabase.storage.from('avatars').upload(filePath, file)
-    }
-
     resetPassword(userEmail: string) {
       return this.supabase.auth.resetPasswordForEmail(userEmail);
     }
@@ -80,4 +63,30 @@ export class SupabaseService {
     updatePassword(newPassword: string) {
       return this.supabase.auth.updateUser({password: newPassword});
     }
+
+    async getData() {
+      const {data} = await this.supabase.from('events').select('*');
+      // const {data} = await this.supabase.from('events').select('metadata->date');
+
+      // Just console logging for now until the events page is ready
+      console.log(data);
+    }
+
+    // Commented these methods out because I think they're from a tutorial and not needed for our project specifically
+
+    // updateProfile(profile: Profile) {
+    //     const update = {
+    //         ...profile,
+    //         updated_at: new Date(),
+    //     }
+    //
+    //     return this.supabase.from('profiles').upsert(update)
+    // }
+    // downLoadImage(path: string) {
+    //     return this.supabase.storage.from('avatars').download(path)
+    // }
+    //
+    // uploadAvatar(filePath: string, file: File) {
+    //     return this.supabase.storage.from('avatars').upload(filePath, file)
+    // }
 }
