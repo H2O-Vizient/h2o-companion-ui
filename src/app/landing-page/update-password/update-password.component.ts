@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {SupabaseService} from '../../services/supabase.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -8,41 +8,43 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
     <div class="reset-container">
       <h1>Password Reset</h1>
 
-<!--      {#if !passwordSuccess}-->
-      <form>
+      <form [formGroup]="form" *ngIf="!passwordSuccess; else passwordUpdated" (ngSubmit)="updatePassword()">
         <div class="input-group password">
-          <input
-            class="form-control"
-            type="password"
-            id="newPassword"
-            placeholder="new password"
+          <input formControlName="newPassword"
+                 class="form-control"
+                 type="text"
+                 id="newPassword"
+                 placeholder="new password"
           />
         </div>
         <div class="input-group password-repeat">
-          <input
-            class="form-control"
-            type="password"
-            id="newPasswordRepeat"
-            placeholder="confirm new password"
+          <input formControlName="newPasswordRepeat"
+                 class="form-control"
+                 type="text"
+                 id="newPasswordRepeat"
+                 placeholder="confirm new password"
           />
         </div>
         <button type="submit"
-                class="btn mx-auto">
+                class="btn mx-auto"
+                [disabled]="invalidPassword()">
         Reset Password
         </button>
       </form>
-<!--      {:else}-->
-      <p class="passwordSuccess">Your password was successfully reset.</p>
-      <p class="passwordSuccess">In order to login please click the button below and enter your credentials:</p>
-      <div class="home-button-wrapper">
-        <button type="button" class="btn center home-button">Back to Home Page</button>
-      </div>
+
+      <ng-template #passwordUpdated>
+        <p class="password-success">Your password was successfully reset.</p>
+        <p class="password-success">In order to login please click the button below and enter your credentials:</p>
+        <div class="home-button-wrapper">
+          <button type="button" class="btn center home-button" routerLink="">Back to Home Page</button>
+        </div>
+      </ng-template>
     </div>
   `,
   styleUrls: ['update-password.component.scss']
 })
-export class UpdatePasswordComponent implements OnInit {
-  passwordSuccess = false;
+export class UpdatePasswordComponent {
+  passwordSuccess = true;
   form: FormGroup;
 
   constructor(protected readonly supabase: SupabaseService) {
@@ -52,13 +54,20 @@ export class UpdatePasswordComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    // - Retrieve access and refresh token off the incoming session on init
-    // - Then the user will enter their new password twice
-    //    - create a method that will allow a user to update their password when the newPassword and newPasswordRepeat match
+  async updatePassword() {
+    const password = this.form.get('newPassword')?.value;
 
-    console.log(this.supabase.session?.access_token);
-    console.log(this.supabase.session?.refresh_token);
-    console.log(this.supabase);
+    const {error} = await this.supabase.updatePassword(password);
+
+    if (error) {
+      console.error(error);
+    } else {
+      console.log('Password reset email sent successfully');
+      this.passwordSuccess = true;
+    }
+  }
+
+  invalidPassword(): boolean {
+    return this.form.get('newPassword')?.value === '' || this.form.get('newPassword')?.value !== this.form.get('newPasswordRepeat')?.value;
   }
 }

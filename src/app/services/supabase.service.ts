@@ -76,4 +76,8 @@ export class SupabaseService {
     resetPassword(userEmail: string) {
       return this.supabase.auth.resetPasswordForEmail(userEmail);
     }
+
+    updatePassword(newPassword: string) {
+      return this.supabase.auth.updateUser({password: newPassword});
+    }
 }
