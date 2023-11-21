@@ -1,5 +1,13 @@
 import {Injectable} from '@angular/core';
-import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient, User} from '@supabase/supabase-js';
+import {
+  AuthChangeEvent,
+  AuthSession,
+  AuthTokenResponse,
+  createClient,
+  Session,
+  SupabaseClient,
+  User
+} from '@supabase/supabase-js';
 import {environment} from '../../environments/environment';
 import {SignInRequest} from '../models/sign-in-request';
 
@@ -40,9 +48,8 @@ export class SupabaseService {
         return this.supabase.auth.onAuthStateChange(callback)
     }
 
-    signIn(request: SignInRequest) {
-        // TODO: change this to signInWithPassword
-        this.supabase.auth.signInWithOtp({email: request.email});
+    signIn(request: SignInRequest): Promise<AuthTokenResponse> {
+        return this.supabase.auth.signInWithPassword({email: request.email, password: request.password});
     }
 
     signOut() {
@@ -64,5 +71,9 @@ export class SupabaseService {
 
     uploadAvatar(filePath: string, file: File) {
         return this.supabase.storage.from('avatars').upload(filePath, file)
+    }
+
+    resetPassword(userEmail: string) {
+      return this.supabase.auth.resetPasswordForEmail(userEmail);
     }
 }

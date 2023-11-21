@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {SignUpRequest} from '../models/sign-up-request';
+import {FormControl, FormGroup} from '@angular/forms';
+import {SignUpRequest} from '../../models/sign-up-request';
 
 @Component({
   // TODO:
@@ -66,7 +66,7 @@ import {SignUpRequest} from '../models/sign-up-request';
         </form>
       </div>
       <button type="button" class="btn btn-primary" [disabled]="!signupForm.valid" (click)="advanceSignupStage()">Next</button>
-      <button type="button" class="btn btn-primary">{{signupStage > 0 ? 'Back' : 'Back to Home Page'}}</button>
+      <button type="button" class="btn btn-primary" [routerLink]="''">{{signupStage > 0 ? 'Back' : 'Back to Home Page'}}</button>
       </div>
   `,
   styleUrls: ['./sign-up.component.scss']
