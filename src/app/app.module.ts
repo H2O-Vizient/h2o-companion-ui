@@ -12,6 +12,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ForgotPasswordComponent} from './landing-page/forgot-password/forgot-password.component';
 import {UpdatePasswordComponent} from './landing-page/update-password/update-password.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import {MatButtonModule} from '@angular/material/button';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

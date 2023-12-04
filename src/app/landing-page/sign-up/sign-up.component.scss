@@ -28,3 +28,30 @@ button:disabled {
   background-color: white;
   border: 1px solid gray;
 }
+
+
+// TEMP STYLES
+
+.input-container {
+  height: 3rem;
+  display: flex;
+  margin: .75rem 0;
+
+  .password-input {
+    height: 4.5rem;
+  }
+
+  .hide-icon {
+    margin: 0;
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  button {
+    width: 6rem;
+  }
+}

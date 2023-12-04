@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {
-  AuthChangeEvent,
+  AuthChangeEvent, AuthResponse,
   AuthSession,
   AuthTokenResponse,
   createClient,
@@ -50,6 +50,10 @@ export class SupabaseService {
 
     signIn(request: SignInRequest): Promise<AuthTokenResponse> {
         return this.supabase.auth.signInWithPassword({email: request.email, password: request.password});
+    }
+
+    signUp(request: SignInRequest): Promise<AuthResponse> {
+        return this.supabase.auth.signUp({email: request.email, password: request.password});
     }
 
     signOut() {

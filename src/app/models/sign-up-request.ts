@@ -6,7 +6,7 @@ export interface SignUpRequest {
     password: string,
     passwordConfirmed: boolean,
     addToMailingList: boolean,
-    phone: string,
+    phoneNumber: string,
     birthday:string,
     affiliations: string[],
     publicBio: string,
