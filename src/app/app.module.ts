@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ForgotPasswordComponent} from './landing-page/forgot-password/forgot-password.component';
 import {UpdatePasswordComponent} from './landing-page/update-password/update-password.component';
 import {MatButtonModule} from '@angular/material/button';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatButtonModule} from '@angular/material/button';
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
