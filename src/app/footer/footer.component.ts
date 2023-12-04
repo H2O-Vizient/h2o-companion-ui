@@ -4,21 +4,16 @@ import { Component } from '@angular/core';
   selector: 'app-footer',
   template: `<section class="footer">
     <div class="tab">
-        <span class="material-symbols-outlined">
-            group
-        </span>
+      <mat-icon>people_outline</mat-icon>
+
       Groups
     </div>
     <div class="tab selected">
-        <span class="material-symbols-outlined">
-            grid_view
-        </span>
+      <mat-icon>event_note</mat-icon>
       Events
     </div>
     <div class="tab">
-       <span class="material-symbols-outlined">
-        account_circle
-    </span>
+      <mat-icon>account_circle</mat-icon>
       Profile
     </div>
   </section>`,

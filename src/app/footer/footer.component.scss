@@ -13,11 +13,12 @@ section {
   .tab {
     display: flex;
     flex-direction: column;
-    text-align: center;
     font-size: small;
+    justify-content: center;
+    align-items: center;
   }
 
-  span {
+  mat-icon {
     color: #ADC7FF;
   }
 
@@ -25,7 +26,7 @@ section {
     color: #004DFF;
     font-weight: 700;
 
-    span {
+    mat-icon {
       color: #004DFF;
     }
   }

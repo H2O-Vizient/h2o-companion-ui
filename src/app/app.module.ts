@@ -13,6 +13,8 @@ import {ForgotPasswordComponent} from './landing-page/forgot-password/forgot-pas
 import {UpdatePasswordComponent} from './landing-page/update-password/update-password.component';
 import {MatButtonModule} from '@angular/material/button';
 import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { FooterComponent } from './footer/footer.component';
     SignUpComponent,
     ForgotPasswordComponent,
     UpdatePasswordComponent,
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,8 @@ import { FooterComponent } from './footer/footer.component';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
