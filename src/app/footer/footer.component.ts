@@ -4,8 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-footer',
   template: `<section class="footer">
     <div class="tab">
-      <mat-icon>people_outline</mat-icon>
-
+      <mat-icon>inbox</mat-icon>
       Groups
     </div>
     <div class="tab selected">
