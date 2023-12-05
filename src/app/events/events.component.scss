@@ -12,11 +12,6 @@ h1 {
   font-family: helvetica;
 }
 
-h2 {
-  color: #004DFF;
-  margin: 1em 0;
-}
-
 .btn-group {
   width: 100%;
 
@@ -29,17 +24,4 @@ h2 {
     background-color: #739CFF;
     color: white;
   }
-}
-
-.layout {
-  display: flex;
-  flex-direction: column;
-}
-
-.calendar-container {
-  align-content: center;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  box-shadow: 0px 10px 20px 0px hsl(0, 0%, 80%);
 }

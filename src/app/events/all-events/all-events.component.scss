@@ -1,0 +1,70 @@
+.events {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 2em 0 0 1em;
+
+  .label {
+    color: #004DFF;
+    font-weight: 700;
+    margin-bottom: .5em;
+  }
+
+  form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+
+    .select-group {
+      margin: 1em;
+
+      select {
+        width: 17em;
+      }
+    }
+  }
+
+  .event-list {
+    .event-thumbnail {
+      display: flex;
+      flex-direction: row;
+      margin: 1em;
+
+      .event-image {
+        font-size: 6em;
+        color: #ADC7FF;
+        width:auto;
+        height: auto;
+      }
+
+      .event-info {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+
+        .name-date {
+          margin-right: 1em;
+
+          .event-name {
+            color: #004DFF;
+            font-size: 1.35em;
+            font-weight: bold;
+          }
+        }
+
+        .event-location {
+          color: #004DFF;
+          font-weight: bold;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+
+          .event-location-icon {
+            height: 1em;
+          }
+        }
+      }
+    }
+  }
+}

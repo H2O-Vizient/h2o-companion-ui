@@ -18,6 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { EventsComponent } from './events/events.component';
 import { AllEventsComponent } from './events/all-events/all-events.component';
 import { UserEventsComponent } from './events/user-events/user-events.component';
+import {MatSelectModule} from '@angular/material/select';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { UserEventsComponent } from './events/user-events/user-events.component'
     ReactiveFormsModule,
     FormsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
