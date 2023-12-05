@@ -1,3 +1,5 @@
+@import "src/themes";
+
 section {
   position: sticky;
   bottom: 0;
@@ -20,15 +22,15 @@ section {
   }
 
   mat-icon {
-    color: #ADC7FF;
+    color: $secondary;
   }
 
   .selected {
-    color: #004DFF;
+    color: $primary;
     font-weight: 700;
 
     mat-icon {
-      color: #004DFF;
+      color: $primary;
     }
   }
 }

@@ -1,3 +1,5 @@
+@import "src/themes";
+
 section {
   display: flex;
   flex-direction: column;
@@ -5,7 +7,7 @@ section {
 }
 
 h1 {
-  color: #004DFF;
+  color: $primary;
   margin: 0.5em 0.25em;
   font-weight: 700;
   font-size: 2.28em;
@@ -16,12 +18,12 @@ h1 {
   width: 100%;
 
   .btn {
-    border: 1px solid #ADC7FF;
+    border: 1px solid $secondary;
     font-size: x-small;
   }
 
   .selected {
-    background-color: #739CFF;
+    background-color: $secondary;
     color: white;
   }
 }

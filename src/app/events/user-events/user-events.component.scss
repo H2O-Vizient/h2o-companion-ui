@@ -1,3 +1,5 @@
+@import "src/themes";
+
 .no-events {
   display: flex;
   flex-direction: column;
@@ -7,7 +9,7 @@
   margin: 1em;
 
   h2 {
-    color: #004DFF;
+    color: $primary;
     margin: 1em 0;
   }
 
@@ -16,7 +18,7 @@
     display: contents;
     height: 100%;
     width: 100%;
-    color: #ADC7FF;
+    color: $secondary;
   }
 
   span {
