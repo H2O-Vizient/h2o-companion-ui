@@ -10,6 +10,7 @@ import {
 } from '@supabase/supabase-js';
 import {environment} from '../../environments/environment';
 import {SignInRequest} from '../models/sign-in-request';
+import {SignUpRequest} from "../models/sign-up-request";
 
 export interface Profile {
     id?: string
@@ -52,7 +53,7 @@ export class SupabaseService {
         return this.supabase.auth.signInWithPassword({email: request.email, password: request.password});
     }
 
-    signUp(request: SignInRequest): Promise<AuthResponse> {
+    signUp(request: SignUpRequest): Promise<AuthResponse> {
         return this.supabase.auth.signUp({email: request.email, password: request.password});
     }
 

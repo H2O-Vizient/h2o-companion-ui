@@ -1,13 +1,16 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SignUpRequest} from '../../models/sign-up-request';
+import {matchValidator} from '../../utils/confirm-password.validator';
+import {SupabaseService} from "../../services/supabase.service";
+import {SignInRequest} from "../../models/sign-in-request";
 
 @Component({
   // TODO:
-  //   - finish template
+  //   - finish template --- TEMPORARY TEMPLATE DONE
   //   - fix form tags
-  //   - wire sign up button
-  //   - add custom validators based on sign up stage
+  //   - wire sign up button --- DONE (but could use some work in the future)
+  //   - add custom validators based on sign up stage --- DONE (but could use some work in the future)
 
   selector: 'app-sign-up',
   template: `
@@ -111,42 +114,39 @@ import {SignUpRequest} from '../../models/sign-up-request';
           <form class="sign-up-form" [formGroup]="signupForm">
               <div class="input-container">
                   <span class="input-group-text">✉</span>
-                  <input type="text" class="form-control text-box-input"
-                         placeholder="email address"
-                         formControlName="email">
+                  <mat-form-field class="email-input">
+                      <mat-label>Enter your email address</mat-label>
+                      <input matInput type="email" formControlName="email">
+                      <mat-error *ngIf="signupForm.invalid && signupForm.touched">{{getErrorMessage()}}</mat-error>
+                  </mat-form-field>
               </div>
-              <!--            <mat-form-field>-->
-              <!--              <mat-label>Enter your password</mat-label>-->
-              <!--              <input matInput [type]="hide ? 'password' : 'text'">-->
-              <!--              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">-->
-              <!--                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
-              <!--              </button>-->
-              <!--            </mat-form-field>-->
               <div class="input-container">
                   <span class="input-group-text">🔒</span>
                   <mat-form-field class="password-input">
                       <mat-label>Enter your password</mat-label>
-                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                      <button mat-icon-button matSuffix class="hide-icon" (click)="hide = !hide"
-                              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      <input matInput [type]="password1 ? 'password' : 'text'" formControlName="password">
+                      <button mat-icon-button matSuffix class="hide-icon" (click)="password1 = !password1"
+                              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="password1">
+                          <mat-icon>{{password1 ? 'visibility_off' : 'visibility'}}</mat-icon>
                       </button>
+                    <mat-error *ngIf="signupForm.invalid && signupForm.touched">{{getErrorMessage()}}</mat-error>
                   </mat-form-field>
               </div>
               <div class="input-container">
                   <span class="input-group-text">🔒</span>
                   <mat-form-field class="password-input">
                       <mat-label>Confirm your password</mat-label>
-                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                      <button mat-icon-button matSuffix class="hide-icon" (click)="hide = !hide"
-                              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      <input matInput [type]="password2 ? 'password' : 'text'" formControlName="passwordConfirmed">
+                      <button mat-icon-button matSuffix class="hide-icon" (click)="password2 = !password2"
+                              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="password2">
+                          <mat-icon>{{password2 ? 'visibility_off' : 'visibility'}}</mat-icon>
                       </button>
+                    <mat-error *ngIf="signupForm.invalid && signupForm.touched">{{getErrorMessage()}}</mat-error>
                   </mat-form-field>
               </div>
               <div class="button-container">
                   <button type="button" class="btn btn-primary" [routerLink]="''">Cancel</button>
-                  <button type="button" class="btn btn-primary" [disabled]="!signupForm.valid">
+                  <button type="button" class="btn btn-primary" [disabled]="!signupForm.valid" (click)="onSignUp()">
                       Sign Up
                   </button>
               </div>
@@ -156,16 +156,16 @@ import {SignUpRequest} from '../../models/sign-up-request';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-  signupForm = new FormGroup({
+  signupForm: FormGroup = new FormGroup({
     name: new FormControl(null),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required]),
-    passwordConfirmed: new FormControl(null, [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl<string>('', [Validators.required, matchValidator('passwordConfirmed', true)]),
+    passwordConfirmed: new FormControl(null, [Validators.required, matchValidator('password')]),
     phoneNumber: new FormControl(null),
     birthday: new FormControl(null),
     affiliations: new FormControl(null),
     publicBio: new FormControl(null),
-    addToMailingList: new FormControl(false)
+    addToMailingList: new FormControl(false),
   });
   signupStage: number = 0;
   signUpRequest: SignUpRequest = {
@@ -182,7 +182,20 @@ export class SignUpComponent {
     publicBio: '',
     volunteerId: ''
   };
-  hide = true;
+  password1 = true;
+  password2 = true;
+
+  constructor(private readonly supabaseService: SupabaseService) {
+  }
+
+  onSignUp() {
+    const request: SignUpRequest = {
+      email: this.signupForm.get('email')?.value,
+      password: this.signupForm.value.password,
+    }
+
+    this.supabaseService.signUp(request)
+  }
 
   advanceSignupStage() {
     if (this.signupStage < 6) {
@@ -192,11 +205,21 @@ export class SignUpComponent {
     }
   }
 
-  addAffilitation() {
-    if (this.signupForm.value.affiliations) {
-      this.signUpRequest.affiliations.push(this.signupForm.value.affiliations)
-      this.signupForm.value.affiliations = null
+  getErrorMessage() {
+    if (this.signupForm.get('email')?.hasError('email')) {
+      return 'Not a valid email';
+    } else if (this.signupForm.get('passwordConfirmed')?.hasError('matching')) {
+      return 'Passwords must match';
     }
+
+    return 'You must enter a value';
   }
+
+  // addAffilitation() {
+  //   if (this.signupForm.value.affiliations) {
+  //     this.signUpRequest.affiliations.push(this.signupForm.value.affiliations)
+  //     this.signupForm.value.affiliations = null
+  //   }
+  // }
 
 }
