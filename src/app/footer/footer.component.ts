@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -19,11 +19,18 @@ import {ActivatedRoute, Router} from '@angular/router';
   </section>`,
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit {
   selectedTab: string = '';
+
   constructor(private router: Router, private route: ActivatedRoute) {
   }
-  changeView(selectedRoute: string) {
+
+  ngOnInit(): void {
+  // this can be refactored
+  this.selectedTab = this.router.url;
+  }
+
+  changeView(selectedRoute: string): void {
     this.router.navigate([selectedRoute], {relativeTo: this.route});
 
     this.selectedTab = selectedRoute;

@@ -1,0 +1,31 @@
+.no-events {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 1em;
+
+  h2 {
+    color: #004DFF;
+    margin: 1em 0;
+  }
+
+  .calendar {
+    font-size: 15em;
+    display: contents;
+    height: 100%;
+    width: 100%;
+    color: #ADC7FF;
+  }
+
+  span {
+    text-align: center;
+  }
+
+  .view-all {
+    width: 100%;
+    margin: 4em 1.5em 1em 1.5em;
+    width: 19em;
+  }
+}

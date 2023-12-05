@@ -16,6 +16,8 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import {MatIconModule} from '@angular/material/icon';
 import { EventsComponent } from './events/events.component';
+import { AllEventsComponent } from './events/all-events/all-events.component';
+import { UserEventsComponent } from './events/user-events/user-events.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { EventsComponent } from './events/events.component';
     UpdatePasswordComponent,
     FooterComponent,
     HeaderComponent,
-    EventsComponent
+    EventsComponent,
+    AllEventsComponent,
+    UserEventsComponent
   ],
   imports: [
     BrowserModule,
