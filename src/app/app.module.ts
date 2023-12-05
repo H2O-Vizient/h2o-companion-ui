@@ -20,6 +20,7 @@ import { AllEventsComponent } from './events/all-events/all-events.component';
 import { UserEventsComponent } from './events/user-events/user-events.component';
 import {MatSelectModule} from '@angular/material/select';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
