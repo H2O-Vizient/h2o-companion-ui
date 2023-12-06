@@ -5,29 +5,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 2em;
   height: 100%;
-  margin: 1em;
 
   h2 {
     color: $primary;
-    margin: 1em 0;
+    margin: 0.5em 0;
   }
 
   .calendar {
-    font-size: 15em;
+    font-size: 12em;
     display: contents;
-    height: 100%;
-    width: 100%;
     color: $secondary;
   }
 
   span {
     text-align: center;
+    padding: 1em;
   }
 
   .view-all {
-    width: 100%;
-    margin: 4em 1.5em 1em 1.5em;
-    width: 19em;
+    margin: 0 2em;
   }
 }

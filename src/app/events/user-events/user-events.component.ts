@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {EventsRoutingService} from '../events-routing.service';
 
 @Component({
   selector: 'app-user-events',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
           <span>
             You currently don't have any scheduled events. When you schedule one, you can view it here.
         </span>
-          <button class="btn btn-primary view-all" type="button">VIEW ALL UPCOMING EVENTS</button>
+          <button class="btn btn-primary view-all" type="button" (click)="changeView()">VIEW ALL UPCOMING EVENTS</button>
       </div>
       <ng-template #eventsTemplate>
         DISPLAY EVENTS HERE
@@ -18,4 +19,10 @@ import { Component } from '@angular/core';
 })
 export class UserEventsComponent {
  events = [];
+
+ constructor(private eventsRoutingService: EventsRoutingService) {}
+
+ changeView() {
+    this.eventsRoutingService.selectedRoute.next('all-events');
+ }
 }

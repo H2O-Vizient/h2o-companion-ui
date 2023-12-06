@@ -3,27 +3,34 @@
 section {
   display: flex;
   flex-direction: column;
-  height: 100%;
-}
 
-h1 {
-  color: $primary;
-  margin: 0.5em 0.25em;
-  font-weight: 700;
-  font-size: 2.28em;
-  font-family: helvetica;
-}
 
-.btn-group {
-  width: 100%;
-
-  .btn {
-    border: 1px solid $secondary;
-    font-size: x-small;
+  h1 {
+    color: $primary;
+    margin: 0.5em 0.25em;
+    font-weight: 700;
+    font-size: 2.28em;
+    font-family: helvetica;
   }
+ .event-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  .selected {
-    background-color: $secondary;
-    color: white;
-  }
+   .btn-group {
+     width: 80%;
+     //max-width: 70em;
+     margin-top: 1em;
+
+     .btn {
+       border: 1px solid $secondary;
+       font-size: x-small;
+     }
+
+     .selected {
+       background-color: $secondary;
+       color: white;
+     }
+   }
+ }
 }

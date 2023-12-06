@@ -21,6 +21,7 @@ import { UserEventsComponent } from './events/user-events/user-events.component'
 import {MatSelectModule} from '@angular/material/select';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {EventsRoutingService} from './events/events-routing.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     MatSelectModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [EventsRoutingService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

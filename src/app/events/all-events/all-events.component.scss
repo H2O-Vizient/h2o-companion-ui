@@ -9,6 +9,7 @@
   .label {
     color: $primary;
     font-weight: 700;
+    font-size: small;
     margin-bottom: .5em;
   }
 
@@ -20,26 +21,26 @@
 
     .select-group {
       margin: 1em;
-      flex-wrap: nowrap;
 
-      .input-group-text {
-        background-color: #fff !important;
+      .input-group {
+        flex-wrap: nowrap;
 
-        mat-icon {
-          color: $primary;
+        .input-group-text {
+          background-color: #fff !important;
+
+          mat-icon {
+            color: $primary;
+          }
         }
-      }
 
-      select {
-        width: 17em;
-        border-left: none;
+        select {
+          border-left: none;
+        }
       }
     }
   }
 
   .event-list {
-    margin: 2em 2em 0 2em;
-
     .event-thumbnail {
       display: flex;
       flex-direction: row;
