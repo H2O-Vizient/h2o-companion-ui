@@ -12,7 +12,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ForgotPasswordComponent} from './landing-page/forgot-password/forgot-password.component';
 import {UpdatePasswordComponent} from './landing-page/update-password/update-password.component';
 import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from "@angular/material/icon";
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import {MatIconModule} from '@angular/material/icon';
+import { EventsComponent } from './events/events.component';
+import { AllEventsComponent } from './events/all-events/all-events.component';
+import { UserEventsComponent } from './events/user-events/user-events.component';
+import {MatSelectModule} from '@angular/material/select';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
 
 @NgModule({
@@ -21,7 +28,12 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    FooterComponent,
+    HeaderComponent,
+    EventsComponent,
+    AllEventsComponent,
+    UserEventsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +45,11 @@ import {MatFormFieldModule} from "@angular/material/form-field";
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
