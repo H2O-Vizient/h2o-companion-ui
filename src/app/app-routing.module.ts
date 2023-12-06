@@ -9,8 +9,7 @@ import {UserEventsComponent} from './events/user-events/user-events.component';
 import {AllEventsComponent} from './events/all-events/all-events.component';
 
 const routes: Routes = [
-  //   set this back to sign-in before merging
-  {path: '', redirectTo: '/events', pathMatch: 'full'},
+  {path: '', redirectTo: '/sign-in', pathMatch: 'full'},
   {path: 'sign-in', component: SignInComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
