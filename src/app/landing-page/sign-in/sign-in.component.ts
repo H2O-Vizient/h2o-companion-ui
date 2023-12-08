@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SupabaseService} from '../../services/supabase.service';
 import {SignInRequest} from '../../models/sign-in-request';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sign-in',
@@ -51,8 +52,10 @@ export class SignInComponent {
 });
 
   constructor(
-      private readonly supabase: SupabaseService,
-      protected router: Router
+      private supabase: SupabaseService,
+      protected router: Router,
+      private route: ActivatedRoute,
+      private snackbar: MatSnackBar
   ) {}
 
   async onSubmit() {
@@ -66,17 +69,25 @@ export class SignInComponent {
 
       const response = await this.supabase.signIn(request);
 
-      // Just calling this method here in order to see what it looks like to retrieve data from supabase
-      await this.supabase.getData();
+      if(!response.error) {
+        this.supabase._session = response.data.session;
+        await this.router.navigate(['../events'], {relativeTo: this.route});
+      } else {
+        this.snackbar.open('Your username or password is incorrect', undefined, {
+          duration: 3000
+        });
+      }
 
-      console.log(response);
+      // Just calling this method here in order to see what it looks like to retrieve data from supabase
+      // await this.supabase.getData();
+
     } catch (error) {
       if (error instanceof Error) {
-        alert(error.message)
+        alert(error.message);
       }
     } finally {
-      this.signInForm.reset()
-      this.loading = false
+      this.signInForm.reset();
+      this.loading = false;
     }
   }
 }

@@ -15,8 +15,8 @@ import {SignUpRequest} from "../models/sign-up-request";
 export interface Profile {
     id?: string
     username: string
-    website: string
-    avatar_url: string
+    // website: string
+    // avatar_url: string
 }
 
 @Injectable({
@@ -28,6 +28,13 @@ export class SupabaseService {
 
     constructor() {
         this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    }
+
+    set session(session) {
+        this.supabase.auth.setSession({
+            access_token: session?.access_token as string,
+            refresh_token: session?.refresh_token as string
+        })
     }
 
     get session() {
@@ -76,22 +83,4 @@ export class SupabaseService {
       // Just console logging for now until the events page is ready
       console.log(data);
     }
-
-    // Commented these methods out because I think they're from a tutorial and not needed for our project specifically
-
-    // updateProfile(profile: Profile) {
-    //     const update = {
-    //         ...profile,
-    //         updated_at: new Date(),
-    //     }
-    //
-    //     return this.supabase.from('profiles').upsert(update)
-    // }
-    // downLoadImage(path: string) {
-    //     return this.supabase.storage.from('avatars').download(path)
-    // }
-    //
-    // uploadAvatar(filePath: string, file: File) {
-    //     return this.supabase.storage.from('avatars').upload(filePath, file)
-    // }
 }
