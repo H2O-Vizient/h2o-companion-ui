@@ -1,8 +1,9 @@
-@import "src/themes";
+@import 'src/themes';
 
 section {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
 
   h1 {
@@ -10,7 +11,7 @@ section {
     margin: 0.5em 0.25em;
     font-weight: 700;
     font-size: 2.28em;
-    font-family: helvetica;
+    font-family: $headerFont1;
   }
  .event-list-container {
     display: flex;

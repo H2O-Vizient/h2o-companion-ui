@@ -21,8 +21,9 @@ import {UserEventsComponent} from './events/user-events/user-events.component';
 import {MatSelectModule} from '@angular/material/select';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from "@angular/material/form-field";
-import {EventsRoutingService} from './events/events-routing.service';
+import {EventsRoutingService} from './services/events-routing.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {UserProfileComponent} from './user-profile/user-profile.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
         HeaderComponent,
         EventsComponent,
         AllEventsComponent,
-        UserEventsComponent
+        UserEventsComponent,
+        UserProfileComponent
     ],
     imports: [
         BrowserModule,

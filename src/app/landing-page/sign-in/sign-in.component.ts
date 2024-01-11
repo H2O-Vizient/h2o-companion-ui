@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SupabaseService} from '../../services/supabase.service';
 import {SignInRequest} from '../../models/sign-in-request';
@@ -26,7 +26,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
                   </div>
                 <div class="login-help">
                   <div class="form-check checkbox-container">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <input formControlName="rememberUser" type="checkbox" class="form-check-input" id="exampleCheck1">
                       <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                   </div>
                     <a [routerLink]="'/forgot-password'" class="forgot-login">Forgot Login Credentials?</a>
@@ -43,20 +43,31 @@ import {MatSnackBar} from '@angular/material/snack-bar';
       </div>`,
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent {
+export class SignInComponent implements OnInit {
   loading = false;
 
   signInForm = new FormGroup({
     email: new FormControl(),
-    password: new FormControl()
+    password: new FormControl(),
+    rememberUser: new FormControl()
 });
 
   constructor(
-      private supabase: SupabaseService,
+      private supabaseService: SupabaseService,
       protected router: Router,
       private route: ActivatedRoute,
       private snackbar: MatSnackBar
   ) {}
+
+  ngOnInit() {
+    console.log(localStorage.getItem('email'));
+
+    if (localStorage.getItem('email')) {
+      this.signInForm.get('email')?.setValue(localStorage.getItem('email'));
+      this.signInForm.get('password')?.setValue(localStorage.getItem('password'));
+      this.signInForm.get('rememberUser')?.setValue(true);
+    }
+  }
 
   async onSubmit() {
 
@@ -67,11 +78,19 @@ export class SignInComponent {
         password: this.signInForm.get('password')?.value
       }
 
-      const response = await this.supabase.signIn(request);
+      const response = await this.supabaseService.signIn(request);
 
       if(!response.error) {
-        this.supabase._session = response.data.session;
+        this.supabaseService._session = response.data.session;
+        this.supabaseService.isActiveSession.next(true);
         await this.router.navigate(['../events'], {relativeTo: this.route});
+
+        if (this.signInForm.get('rememberUser')) {
+          localStorage.setItem('email', request.email);
+
+          // leaving this here for ease of signing in for dev work
+          localStorage.setItem('password', request.password);
+        }
       } else {
         this.snackbar.open('Your username or password is incorrect', undefined, {
           duration: 3000
@@ -79,7 +98,7 @@ export class SignInComponent {
       }
 
       // Just calling this method here in order to see what it looks like to retrieve data from supabase
-      // await this.supabase.getData();
+      await this.supabaseService.getData();
 
     } catch (error) {
       if (error instanceof Error) {

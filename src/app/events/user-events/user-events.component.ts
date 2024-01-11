@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {EventsRoutingService} from '../events-routing.service';
+import {EventsRoutingService} from '../../services/events-routing.service';
 
 @Component({
   selector: 'app-user-events',

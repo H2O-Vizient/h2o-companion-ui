@@ -1,24 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {BehaviorSubject} from 'rxjs';
-import {EventsRoutingService} from './events-routing.service';
+import {EventsRoutingService} from '../services/events-routing.service';
 
 @Component({
   selector: 'app-events',
   template: `
       <section>
+        <div class="header-wrapper">
           <h1>Events</h1>
+        </div>
 <!--        TODO: events header should be sticky-->
-          <div class="event-list-container">
-              <div class="btn-group">
-                  <button class="btn" [ngClass]="{'selected': this.selectedRoute == 'user-events'}" type="button"
-                          (click)="selectView('user-events')">My Events
-                  </button>
-                  <button class="btn" type="button" [ngClass]="{'selected': this.selectedRoute == 'all-events'}"
-                          (click)="selectView('all-events')">All Events
-                  </button>
-              </div>
-              <router-outlet></router-outlet>
+        <div class="event-list-container">
+            <div class="btn-group">
+                <button class="btn" [ngClass]="{'selected': this.selectedRoute == 'user-events'}" type="button"
+                        (click)="selectView('user-events')">My Events
+                </button>
+                <button class="btn" type="button" [ngClass]="{'selected': this.selectedRoute == 'all-events'}"
+                        (click)="selectView('all-events')">All Events
+                </button>
+            </div>
+            <router-outlet></router-outlet>
           </div>
       </section>`,
   styleUrls: ['./events.component.scss']

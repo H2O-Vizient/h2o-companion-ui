@@ -11,13 +11,7 @@ import {
 import {environment} from '../../environments/environment';
 import {SignInRequest} from '../models/sign-in-request';
 import {SignUpRequest} from "../models/sign-up-request";
-
-export interface Profile {
-    id?: string
-    username: string
-    // website: string
-    // avatar_url: string
-}
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +19,7 @@ export interface Profile {
 export class SupabaseService {
     private supabase: SupabaseClient;
     _session: AuthSession | null = null;
+    isActiveSession: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor() {
         this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
@@ -65,6 +60,8 @@ export class SupabaseService {
     }
 
     signOut() {
+        this._session = null;
+        this.isActiveSession.next(false);
         return this.supabase.auth.signOut()
     }
 

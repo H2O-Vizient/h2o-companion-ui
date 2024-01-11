@@ -7,6 +7,7 @@ import {UpdatePasswordComponent} from './landing-page/update-password/update-pas
 import {EventsComponent} from './events/events.component';
 import {UserEventsComponent} from './events/user-events/user-events.component';
 import {AllEventsComponent} from './events/all-events/all-events.component';
+import {UserProfileComponent} from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/sign-in', pathMatch: 'full'},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path: 'events', component: EventsComponent, children: [
       {path: 'user-events', component: UserEventsComponent},
       {path: 'all-events', component: AllEventsComponent}
-    ]}
+    ]},
+  {path: 'profile', component: UserProfileComponent}
 ];
 
 @NgModule({

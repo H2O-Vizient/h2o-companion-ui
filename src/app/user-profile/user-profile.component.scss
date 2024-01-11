@@ -1,0 +1,24 @@
+@import 'src/themes.scss';
+
+div.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    color: $primary;
+    margin: 0.5em 0.25em;
+    font-weight: 700;
+    font-size: 2.28em;
+    font-family: $headerFont1;
+    text-align: center;
+  }
+  div.sign-out {
+    display: flex;
+    justify-content: center;
+
+    button {
+      width: 75%;
+    }
+  }
+}

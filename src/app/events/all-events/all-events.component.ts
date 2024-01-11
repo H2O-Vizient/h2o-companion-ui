@@ -80,5 +80,7 @@ export class AllEventsComponent implements OnInit {
       this.dates.push(x.date);
       this.locations.push(x.location);
     });
+
+
   }
 }
